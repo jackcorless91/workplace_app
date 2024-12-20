@@ -4,6 +4,7 @@ from models.team_member import Team_member
 from models.rosters import Roster
 from models.projects import Project
 from models.performance_reviews import Performance_review
+from models.departments import Department
 
 
 db_commands = Blueprint("db", __name__)
@@ -37,10 +38,15 @@ def seed_tables():
     ],
     performance_reviews = [
        Performance_review()
+    ],
+    departments = [
+       Department()
+
     ]
     db.session.add_all(team_members)
     db.session.add_all(rosters)
     db.session.add_all(projects)
     db.session.add_all(performance_reviews)
+    db.session.add_all(departments)
     db.session.commit()
     print("Tables seeded")

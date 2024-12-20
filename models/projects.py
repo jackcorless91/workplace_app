@@ -2,7 +2,7 @@ from init import ma, db
 from datetime import date, time
 
 class Project(db.Model):
-  __tablename_ = "Projects"
+  __tablename_ = "projects"
 
   id = db.Column(db.Integer, primary_key=True)
 

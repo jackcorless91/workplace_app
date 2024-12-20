@@ -3,7 +3,7 @@ from init import db, ma
 from datetime import date
 
 class Team_member(db.Model):
-  __tablename__ = "Team_members"
+  __tablename__ = "team_members"
 
   id = db.Column(db.Integer, primary_key=True)
 

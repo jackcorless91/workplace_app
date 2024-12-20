@@ -3,7 +3,7 @@ from datetime import date
 
 
 class Roster(db.Model):
-  __tablename__ = "Rosters"
+  __tablename__ = "rosters"
 
   id = db.Column(db.Integer, primary_key=True)
 

@@ -2,7 +2,7 @@ from init import ma, db
 from datetime import date, time
 
 class Performance_review(db.Model):
-  __tablename__ = "Performance_reviews"
+  __tablename__ = "performance_reviews"
 
   id = db.Column(db.Integer, primary_key=True)
   
