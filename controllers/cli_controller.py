@@ -1,6 +1,8 @@
 from flask import Blueprint
 from init import db,ma
 from models.team_member import Team_member
+from models.rosters import Roster
+from models.projects import Project
 
 
 db_commands = Blueprint("db", __name__)
@@ -17,11 +19,23 @@ def drop_tables():
   print("Tables dropped")
 
 
+"""
+need seed data for all tables **
+"""
+
 @db_commands.cli.command("seed")
 def seed_tables():
-  team_members = [
-    Team_member()
-  ]
-  db.session.add_all(team_members)
-  db.session.commit()
-  print("Tables created")
+    team_members = [
+        Team_member()  
+    ]
+    rosters = [
+        Roster()
+    ],
+    projects = [
+       Project()
+    ]
+    db.session.add_all(team_members)
+    db.session.add_all(rosters)
+    db.session.add_all(projects)
+    db.session.commit()
+    print("Tables seeded")
