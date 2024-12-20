@@ -10,10 +10,14 @@ class Team_member(db.Model):
   first_name = db.Column(db.String(100), nullable=False)
   first_last = db.Column(db.String(100), nullable=False)
   email = db.Column(db.String(100), nullable=False, unique=True)
-  msisdn = db.Column(db.Integer(100), nullable=False, unique=True)
-  # start_date = db.Column(db.Date, )
-  tenure = db.Column(db.Integer(100), nullable=False)
-  salary = db.column(db.Integer(100), nullable=False)
+  msisdn = db.Column(db.Integer, nullable=False, unique=True)
+  start_date = db.Column(db.Date, nullable=False)
+  tenure = db.Column(db.Integer, nullable=False)
+  salary = db.Column(db.Integer, nullable=False)
+
+  """
+  no foreign keys to add
+  """
 
 class Team_memberSchema(ma.Schema):
   class Meta:
