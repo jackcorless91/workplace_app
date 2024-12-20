@@ -20,4 +20,5 @@ class RosterSchema(ma.Schema):
   class Meta:
     fields = ("id", "start_time", "end_time", "shift_date")
 
-RosterSchema = RosterSchema(many=True)
+Roster_Schema = RosterSchema()
+Rosters_Schema = RosterSchema(many=True)

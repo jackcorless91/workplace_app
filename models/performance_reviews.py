@@ -19,4 +19,5 @@ class Performance_reviewSchema(ma.Schema):
   class Meta:
     fields = ("id", "date", "review_score", "comments")
 
-Performance_reviewSchema = Performance_reviewSchema(many=True)
+Performance_review_Schema = Performance_reviewSchema()
+Performance_reviews_Schema = Performance_reviewSchema(many=True)

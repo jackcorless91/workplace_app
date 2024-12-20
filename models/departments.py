@@ -19,3 +19,6 @@ class DepartmentSchema(ma.Schema):
 
   class Meta:
     fields = ("id", "name", "speciality", "opening_time", "closing_time")
+
+Department_Schema = DepartmentSchema()
+Departments_Schema = DepartmentSchema(many=True)

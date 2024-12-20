@@ -23,4 +23,5 @@ class Team_memberSchema(ma.Schema):
   class Meta:
     fields = ("id", "first_name", "last_name", "email", "msisdn", 'tenure', "salary")
 
-Team_memberSchema = Team_memberSchema(many=True)
+Team_member_Schema = Team_memberSchema()
+Team_members_Schema = Team_memberSchema(many=True)
