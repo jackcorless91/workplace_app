@@ -3,7 +3,7 @@ from init import db, ma
 from datetime import date
 
 class Team_member(db.Model):
-  __tablename__ = "team_members"
+  __tablename__ = "Team_members"
 
   id = db.Column(db.Integer, primary_key=True)
 
@@ -24,6 +24,3 @@ class Team_memberSchema(ma.Schema):
     fields = ("id", "first_name", "last_name", "email", "msisdn", 'tenure', "salary")
 
 Team_memberSchema = Team_memberSchema(many=True)
-"""
-change this later, unsure yet of complex and multiple relationship types
-"""
