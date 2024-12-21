@@ -44,9 +44,9 @@ def seed_tables():
 
     rosters = [
       Roster(
-        start_time=time(9, 0),  # 9:00 AM
-        end_time=time(17, 0),  # 5:00 PM
-        shift_date=date(2024, 12, 21)  # Example date
+        start_time=time(9, 0),  
+        end_time=time(17, 0),  
+        shift_date=date(2024, 12, 21)  
       )
     ]
 

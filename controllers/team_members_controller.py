@@ -57,9 +57,9 @@ def create_team_member():
 
 
 # DELETE - /team_members/id - DELETE
-@team_members_bp.route("/<int:team_members_id>", methods=["DELETE"])
-def delete_team_member(team_members_id):
-  stmt = db.select(Team_member).filter_by(id=team_members_id)
+@team_members_bp.route("/<int:team_member_id>", methods=["DELETE"])
+def delete_team_member(team_member_id):
+  stmt = db.select(Team_member).filter_by(id=team_member_id)
   team_member = db.session.scalar(stmt)
   if team_member:
     db.session.delete(team_member)
@@ -70,19 +70,30 @@ def delete_team_member(team_members_id):
 
 
 
-
-    # if err.orig.pgcode == errorcodes.UNIQUE_VIOLATION:
-    #   constraint_name = err.orig.diag.constraint_name
-    #   if constraint_name == "team_member_email_key":
-    #       field = "email"
-    #   elif constraint_name == "team_member_msisdn_key":  
-    #       field = "msisdn"
-    #   else:
-    #       field = "unknown"
-    #   return {"message": f"The field {field} is already in use"}, 409
-
-
-
+# update = /students/id - PUT, PATCH
+@team_members_bp.route("/<int:team_member_id>", methods=["PUT", "PATCH"])
+def update_team_member(team_member_id):
+  try:
+    stmt = db.select(Team_member).filter_by(id=team_member_id)
+    team_member = db.session.scalar(stmt)
+    body_data = request.get_json()
+    if team_member:
+      team_member.first_name = body_data.get("first_name") or team_member.first_name
+      team_member.last_name = body_data.get("last_name") or team_member.last_name
+      team_member.email = body_data.get("email") or team_member.email
+      team_member.msisdn = body_data.get("msisdn") or team_member.msisdn
+      team_member.start_date = body_data.get("start_date") or team_member.start_date
+      team_member.tenure = body_data.get("tenure") or team_member.tenure
+      team_member.salary = body_data.get("salary") or team_member.salary
+      db.session.commit()
+      return Team_member_Schema.dump(team_member)
+    else:
+      return {"message": f"Team member with id {team_member_id} does not exist"}, 404
+  except IntegrityError:
+    return {"message": f"Email address already in use"}, 409
+  """
+  update integreity error to check to multiple instead of just email
+  """
 
 
     
