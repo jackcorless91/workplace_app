@@ -1,5 +1,8 @@
 from flask import Blueprint, request
+from sqlalchemy.exc import IntegrityError
+from psycopg2 import errorcodes
 from init import db, ma
+
 from models.team_members import Team_member, Team_members_Schema, Team_member_Schema
 
 team_members_bp = Blueprint("team_members", __name__, url_prefix="/team_members")
@@ -29,17 +32,44 @@ def get_team_member(team_member_id):
 # POST (create new team member) /team_member
 @team_members_bp.route("/", methods=["POST"])
 def create_team_member():
-  body_data = request.get_json()
-  new_team_member  = Team_member(
-    first_name=body_data.get("first_name"),
-    last_name=body_data.get("last_name"),
-    email=body_data.get("email"),
-    msisdn=body_data.get("msisdn"),
-    start_date=body_data.get("start_date"),
-    tenure=body_data.get("tenure"),
-    salary=body_data.get("salary"),
-  )
-  db.session.add(new_team_member)
-  db.session.commit()
-  return Team_member_Schema.dump(new_team_member), 201
-# 
+  try:
+    body_data = request.get_json()
+    new_team_member  = Team_member(
+      first_name=body_data.get("first_name"),
+      last_name=body_data.get("last_name"),
+      email=body_data.get("email"),
+      msisdn=body_data.get("msisdn"),
+      start_date=body_data.get("start_date"),
+      tenure=body_data.get("tenure"),
+      salary=body_data.get("salary"),
+    )
+    db.session.add(new_team_member)
+    db.session.commit()
+    return Team_member_Schema.dump(new_team_member), 201
+  except IntegrityError as err:
+    print(err.orig.pgcode)
+    if err.orig.pgcode == errorcodes.NOT_NULL_VIOLATION:
+      return {"message": f"The field {err.orig.diag.column_name} is required"}, 409
+    
+    if err.orig.pgcode == errorcodes.UNIQUE_VIOLATION:
+      return {"message": f"The field {err.orig.diag.constraint_name} is already in use"}, 409
+    
+
+
+
+
+    # if err.orig.pgcode == errorcodes.UNIQUE_VIOLATION:
+    #   constraint_name = err.orig.diag.constraint_name
+    #   if constraint_name == "team_member_email_key":
+    #       field = "email"
+    #   elif constraint_name == "team_member_msisdn_key":  
+    #       field = "msisdn"
+    #   else:
+    #       field = "unknown"
+    #   return {"message": f"The field {field} is already in use"}, 409
+
+
+
+
+
+    

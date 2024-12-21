@@ -20,5 +20,5 @@ class ProjectSchema(ma.Schema):
   class Meta:
     fields = ("id", "name", "description", "start_date", "due_date")
 
-Project_Schema = ProjectSchema
+Project_Schema = ProjectSchema()
 Projects_Schema = ProjectSchema(many=True)
