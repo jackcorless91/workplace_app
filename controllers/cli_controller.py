@@ -33,7 +33,7 @@ def seed_tables():
     team_members = [
       Team_member(
         first_name="John",
-        first_last="Doe",
+        last_name="Doe",
         email="john.doe@example.com",
         msisdn=1234567890,
         start_date=date(2020, 1, 15),
@@ -79,7 +79,7 @@ def seed_tables():
     clients = [
       Client(
         first_name="Alice",
-        first_last="Johnson",
+        last_name="Johnson",
         email="alice.johnson@techhub.com",
         msisdn=1234567890,
         company_name="TechHub Solutions",

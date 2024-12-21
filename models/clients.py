@@ -7,7 +7,7 @@ class Client(db.Model):
   id = db.Column(db.Integer, primary_key=True)
 
   first_name = db.Column(db.String(100), nullable=False)
-  first_last = db.Column(db.String(100), nullable=False)
+  last_name = db.Column(db.String(100), nullable=False)
   email = db.Column(db.String(100), nullable=False, unique=True)
   msisdn = db.Column(db.Integer, nullable=False, unique=True)
   company_name = db.Column(db.String(100), nullable=False)
