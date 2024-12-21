@@ -1,12 +1,13 @@
 from flask import Blueprint
 from init import db,ma
-from models.team_member import Team_member
+from datetime import date, time
+from models.team_members import Team_member
 from models.rosters import Roster
 from models.projects import Project
 from models.performance_reviews import Performance_review
 from models.departments import Department
 from models.clients import Client
-from models.client_feedback import Client_feedback
+from models.clients_feedback import Client_feedback
 
 
 db_commands = Blueprint("db", __name__)
@@ -30,29 +31,71 @@ need seed data for all tables **
 @db_commands.cli.command("seed")
 def seed_tables():
     team_members = [
-        Team_member()  
+      Team_member(
+        first_name="John",
+        first_last="Doe",
+        email="john.doe@example.com",
+        msisdn=1234567890,
+        start_date=date(2020, 1, 15),
+        tenure=4,
+        salary=55000
+      )  
     ]
+
     rosters = [
-        Roster()
-    ],
+      Roster(
+        start_time=time(9, 0),  # 9:00 AM
+        end_time=time(17, 0),  # 5:00 PM
+        shift_date=date(2024, 12, 21)  # Example date
+      )
+    ]
+
     projects = [
-       Project()
-    ],
+      Project(
+        name="Website Redesign",
+        description="Redesign the company website to improve user experience and accessibility.",
+        start_date=date(2024, 1, 15),
+        due_date=date(2024, 3, 30)
+      )
+    ]
+
     performance_reviews = [
-       Performance_review()
-    ],
+      Performance_review(
+        date=date(2024, 1, 10),
+        review_score=85,
+        comments="Consistently meets expectations with exceptional performance in teamwork."
+      )
+    ]
+
     departments = [
-       Department()
+      Department(
+        name="Human Resources",
+        speciality="Employee Relations",
+        opening_time=time(9, 0),
+        closing_time=time(17, 0)
+      )
+    ]
 
-    ],
     clients = [
-       Client()
+      Client(
+        first_name="Alice",
+        first_last="Johnson",
+        email="alice.johnson@techhub.com",
+        msisdn=1234567890,
+        company_name="TechHub Solutions",
+        industry_type="Technology"
+      )
+    ]
 
-    ],
     client_feedback = [
-        Client_feedback()
+        Client_feedback(
+          comments="team member was good",
+          rating=10,
+          date_submitted=date(2024, 1, 10)
+        )
 
     ]
+
     db.session.add_all(team_members)
     db.session.add_all(rosters)
     db.session.add_all(projects)
