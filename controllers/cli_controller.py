@@ -7,7 +7,7 @@ from models.projects import Project
 from models.performance_reviews import Performance_review
 from models.departments import Department
 from models.clients import Client
-from models.clients_feedback import Client_feedback
+from models.client_feedbacks import Client_feedback
 
 
 db_commands = Blueprint("db", __name__)
@@ -87,7 +87,7 @@ def seed_tables():
       )
     ]
 
-    client_feedback = [
+    client_feedbacks = [
         Client_feedback(
           comments="team member was good",
           rating=10,
@@ -102,6 +102,6 @@ def seed_tables():
     db.session.add_all(performance_reviews)
     db.session.add_all(departments)
     db.session.add_all(clients)
-    db.session.add_all(client_feedback)
+    db.session.add_all(client_feedbacks)
     db.session.commit()
     print("Tables seeded")
