@@ -22,3 +22,16 @@ def get_department(department_id):
     return data
   else:
     return{"message": f"Department with id {department_id} does not exist"}, 404
+  
+
+# DELETE - /departments/id - DELETE
+@departments_bp.route("/<int:department_id>", methods=["DELETE"])
+def delete_department(department_id):
+  stmt = db.select(Department).filter_by(id=department_id)
+  department = db.session.scalar(stmt)
+  if department:
+    db.session.delete(department)
+    db.session.commit()
+    return {"message": f"Project {department} deleted successfully"}
+  else:
+    return {"message": f"Project with id {department} does not exist"}, 404

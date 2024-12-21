@@ -23,3 +23,16 @@ def get_client_feedback(client_feedback_id):
     return data
   else:
     return {"message": f"Client feedback with id {client_feedback_id} does not exist"}, 404
+  
+
+# DELETE - /clients/id - DELETE
+@client_feedbacks_bp.route("/<int:client_feedback_id>", methods=["DELETE"])
+def delete_client_feedback(client_feedback_id):
+  stmt = db.select(Client_feedback).filter_by(id=client_feedback_id)
+  client_feedback = db.session.scalar(stmt)
+  if client_feedback:
+    db.session.delete(client_feedback)
+    db.session.commit()
+    return {"message": f"Client feedback {client_feedback} deleted successfully"}
+  else:
+    return {"message": f"Client feedback with id {client_feedback} does not exist"}, 404

@@ -22,3 +22,16 @@ def get_client(client_id):
     return data
   else:
     return {"message": f"Client with id {client_id} does not exist"}, 404
+  
+
+# DELETE - /clients/id - DELETE
+@clients_bp.route("/<int:client_id>", methods=["DELETE"])
+def delete_client(client_id):
+  stmt = db.select(Client).filter_by(id=client_id)
+  client = db.session.scalar(stmt)
+  if client:
+    db.session.delete(client)
+    db.session.commit()
+    return {"message": f"Client {client} deleted successfully"}
+  else:
+    return {"message": f"Client with id {client} does not exist"}, 404

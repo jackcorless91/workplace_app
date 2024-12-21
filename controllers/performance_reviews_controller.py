@@ -24,4 +24,14 @@ def get_performance_review(performance_review_id):
     return {"message": f"Performance review with id {performance_review_id} does not exist"}, 404
   
   
-  
+# DELETE - /performance_reviews/id - DELETE
+@performance_reviews_bp.route("/<int:performance_review_id>", methods=["DELETE"])
+def delete_performance_review(performance_review_id):
+  stmt = db.select(Performance_review).filter_by(id=performance_review_id)
+  performance_review = db.session.scalar(stmt)
+  if performance_review:
+    db.session.delete(performance_review)
+    db.session.commit()
+    return {"message": f"Project {performance_review} deleted successfully"}
+  else:
+    return {"message": f"Project with id {performance_review} does not exist"}, 404

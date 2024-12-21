@@ -22,4 +22,16 @@ def get_roster(roster_id):
     return data
   else:
     return {"message": f"Team member with id {roster_id} does not exist"}, 404
-# POST (create new team member) /team_member
+
+
+@rosters_bp.route("/<int:roster_id>", methods=["DELETE"])
+def delete_roster(roster_id):
+  stmt = db.select(Roster).filter_by(id=roster_id)
+  roster = db.session.scalar(stmt)
+  if roster:
+    db.session.delete(roster)
+    db.session.commit()
+    return {"message": f"Roster {roster} deleted successfully"}
+  else:
+    return {"message": f"Roster with id {roster} does not exist"}, 404
+

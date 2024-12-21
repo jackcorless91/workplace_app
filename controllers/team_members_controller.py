@@ -56,6 +56,19 @@ def create_team_member():
     
 
 
+# DELETE - /team_members/id - DELETE
+@team_members_bp.route("/<int:team_members_id>", methods=["DELETE"])
+def delete_team_member(team_members_id):
+  stmt = db.select(Team_member).filter_by(id=team_members_id)
+  team_member = db.session.scalar(stmt)
+  if team_member:
+    db.session.delete(team_member)
+    db.session.commit()
+    return {"message": f"Team member {team_member} deleted successfully"}
+  else:
+    return {"message": f"Team member with id {team_member} does not exist"}, 404
+
+
 
 
     # if err.orig.pgcode == errorcodes.UNIQUE_VIOLATION:

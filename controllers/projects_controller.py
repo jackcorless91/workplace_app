@@ -11,10 +11,8 @@ def get_projects():
   data = Projects_Schema.dump(projects_list)
   return data
 
+
 # GET (specfic project_id) /project/id
-
-  
-
 @projects_bp.route("/<int:project_id>")
 def get_project(project_id):
   stmt = db.select(Project).filter_by(id=project_id)
@@ -24,3 +22,16 @@ def get_project(project_id):
     return data
   else:
     return {"message": f"Team member with id {project_id} does not exist"}, 404
+  
+
+# DELETE - /projects/id - DELETE
+@projects_bp.route("/<int:project_id>", methods=["DELETE"])
+def delete_project(project_id):
+  stmt = db.select(Project).filter_by(id=project_id)
+  project = db.session.scalar(stmt)
+  if project:
+    db.session.delete(project)
+    db.session.commit()
+    return {"message": f"Project {project} deleted successfully"}
+  else:
+    return {"message": f"Project with id {project} does not exist"}, 404
