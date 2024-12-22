@@ -7,6 +7,8 @@ For my project a relational database offers well organised and connected data en
 ### More about the project
 This is a workplace relational database, it is used to manage workplace relationships betwee the team so they are able to see their rosters and have those shifts allocated to a specific department. It also manages the projects specific team members are currently working and display which client is commissioning the project,  along with this is feedback the clients have provided about their experiences.
 
+## Publicly accessible URI
+https://jacks-workplace-db.onrender.com
 
 ## Feedback
 ### Feedback from Evan
