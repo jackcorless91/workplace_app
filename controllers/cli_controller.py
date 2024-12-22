@@ -49,7 +49,8 @@ def seed_tables():
       Roster(
         start_time=time(9, 0),  
         end_time=time(17, 0),  
-        shift_date=date(2024, 12, 21)  
+        shift_date=date(2024, 12, 21),
+        team_member_id=team_members[0].id
       )
     ]
 

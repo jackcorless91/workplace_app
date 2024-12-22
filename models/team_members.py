@@ -16,13 +16,15 @@ class Team_member(db.Model):
   salary = db.Column(db.Integer, nullable=False)
 
   performance_reviews = db.relationship("Performance_review", back_populates="team_member")
+  rosters = db.relationship("Roster", back_populates="team_member")
 
 
 class Team_memberSchema(ma.Schema):
   ordered=True
   performance_reviews = fields.List(fields.Nested("Performance_reviewSchema", exclude=["team_member"]))
+  rosters = fields.List(fields.Nested("RosterSchema", exclude=["team_member"]))
   class Meta:
-    fields = ("id", "first_name", "last_name", "email", "msisdn", 'tenure', "salary", "performance_reviews")
+    fields = ("id", "first_name", "last_name", "email", "msisdn", 'tenure', "salary", "performance_reviews", "rosters")
 
 Team_member_Schema = Team_memberSchema()
 Team_members_Schema = Team_memberSchema(many=True)
