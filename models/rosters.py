@@ -22,7 +22,6 @@ class RosterSchema(ma.Schema):
   ordered=True
   team_member = fields.Nested("Team_memberSchema", only=["first_name", "last_name"])
 
-
   class Meta:
     fields = ("id", "start_time", "end_time", "shift_date", "team_member_id", "team_member")
 

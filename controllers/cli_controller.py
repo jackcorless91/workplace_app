@@ -62,7 +62,9 @@ def seed_tables():
         name="Website Redesign",
         description="Redesign the company website to improve user experience and accessibility.",
         start_date=date(2024, 1, 15),
-        due_date=date(2024, 3, 30)
+        due_date=date(2024, 3, 30),
+        team_member_id=team_members[0].id
+
       )
     ]
     

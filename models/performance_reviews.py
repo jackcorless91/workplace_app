@@ -20,6 +20,7 @@ class Performance_review(db.Model):
 class Performance_reviewSchema(ma.Schema):
   ordered=True
   team_member = fields.Nested("Team_memberSchema", only=["first_name", "last_name"])
+  
   class Meta:
     fields = ("id", "date", "review_score", "comments", "team_member_id", "team_member")
 
