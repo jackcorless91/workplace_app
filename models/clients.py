@@ -16,15 +16,17 @@ class Client(db.Model):
   industry_type = db.Column(db.String(100), nullable=False)
 
   projects = db.relationship("Project", back_populates="client")
+  client_feedbacks = db.relationship("Client_feedback", back_populates="client")
 
 
 class ClientSchema(ma.Schema):
   ordered=True
   projects = fields.List(fields.Nested("ProjectSchema", exclude=["client"]))
+  client_feedbacks = fields.List(fields.Nested("Client_feedbackSchema", exclude=["client"]))
 
 
   class Meta:
-    fields = ("id", "first_name", "last_name", "email", "msisdn", "company_name", "industry_name", "projects")
+    fields = ("id", "first_name", "last_name", "email", "msisdn", "company_name", "industry_name", "projects", "client_feedbacks")
 
 Client_Schema = ClientSchema()
 Clients_Schema = ClientSchema(many=True)

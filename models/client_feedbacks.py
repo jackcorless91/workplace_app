@@ -1,5 +1,10 @@
-from init import ma, db
-from datetime import date, time
+from init import db, ma
+from marshmallow import fields
+from datetime import date
+
+from models.clients import ClientSchema
+
+
 
 class Client_feedback(db.Model):
   __tablename__ = "client_feedback"
@@ -9,15 +14,17 @@ class Client_feedback(db.Model):
   comments = db.Column(db.String(100), nullable=False)
   rating = db.Column(db.Integer, nullable=False)
   date_submitted = db.Column(db.Date, nullable=False)
+  client_id = db.Column(db.Integer, db.ForeignKey("clients.id"))
 
-"""
-project and client foreign keys to be added 
-"""
+  client = db.relationship("Client", back_populates="client_feedbacks")
+
 
 class Client_feedbackSchema(ma.Schema):
   ordered=True
+  client = fields.Nested("ClientSchema", only=["first_name", "last_name"])
+
   class Meta:
-    fields = ("id", "comments", "rating", "date_submitted")
+    fields = ("id", "comments", "rating", "date_submitted", "client_id", "client")
 
 Client_feedback_Schema = Client_feedbackSchema()
 Client_feedbacks_Schema = Client_feedbackSchema(many=True)

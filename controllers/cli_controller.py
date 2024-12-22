@@ -115,7 +115,9 @@ def seed_tables():
         Client_feedback(
           comments="team member was good",
           rating=10,
-          date_submitted=date(2024, 1, 10)
+          date_submitted=date(2024, 1, 10),
+          client_id=clients[0].id
+
         )
 
     ]
