@@ -45,18 +45,6 @@ def seed_tables():
     db.session.add_all(team_members)
     db.session.commit()
 
-    rosters = [
-      Roster(
-        start_time=time(9, 0),  
-        end_time=time(17, 0),  
-        shift_date=date(2024, 12, 21),
-        team_member_id=team_members[0].id
-      )
-    ]
-
-    db.session.add_all(rosters)
-    db.session.commit()
-
     projects = [
       Project(
         name="Website Redesign",
@@ -93,6 +81,19 @@ def seed_tables():
     ]
 
     db.session.add_all(departments)
+    db.session.commit()
+
+    rosters = [
+      Roster(
+        start_time=time(9, 0),  
+        end_time=time(17, 0),  
+        shift_date=date(2024, 12, 21),
+        team_member_id=team_members[0].id,
+        department_id=departments[0].id
+      )
+    ]
+
+    db.session.add_all(rosters)
     db.session.commit()
 
     clients = [
