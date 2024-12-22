@@ -2,6 +2,7 @@ from init import db, ma
 from marshmallow import fields
 from datetime import date
 
+
 class Department(db.Model):
   __tablename__ = "departments"
 

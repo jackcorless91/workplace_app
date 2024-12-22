@@ -45,20 +45,6 @@ def seed_tables():
     db.session.add_all(team_members)
     db.session.commit()
 
-    projects = [
-      Project(
-        name="Website Redesign",
-        description="Redesign the company website to improve user experience and accessibility.",
-        start_date=date(2024, 1, 15),
-        due_date=date(2024, 3, 30),
-        team_member_id=team_members[0].id
-
-      )
-    ]
-    
-    db.session.add_all(projects)
-    db.session.commit()
-
     performance_reviews = [
       Performance_review(
         date=date(2024, 1, 10),
@@ -108,6 +94,21 @@ def seed_tables():
     ]
 
     db.session.add_all(clients)
+    db.session.commit()
+
+    projects = [
+      Project(
+        name="Website Redesign",
+        description="Redesign the company website to improve user experience and accessibility.",
+        start_date=date(2024, 1, 15),
+        due_date=date(2024, 3, 30),
+        team_member_id=team_members[0].id,
+        client_id=clients[0].id
+
+      )
+    ]
+    
+    db.session.add_all(projects)
     db.session.commit()
 
     client_feedbacks = [

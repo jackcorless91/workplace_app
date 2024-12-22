@@ -1,5 +1,7 @@
 from init import db, ma
-from datetime import date, time
+from marshmallow import fields
+from datetime import date
+
 
 class Client(db.Model):
   __tablename__ = "clients"
@@ -13,14 +15,16 @@ class Client(db.Model):
   company_name = db.Column(db.String(100), nullable=False)
   industry_type = db.Column(db.String(100), nullable=False)
 
-  """
-  no foreign key
-  """
+  projects = db.relationship("Project", back_populates="client")
+
 
 class ClientSchema(ma.Schema):
   ordered=True
+  projects = fields.List(fields.Nested("ProjectSchema", exclude=["client"]))
+
+
   class Meta:
-    fields = ("id", "first_name", "last_name", "email", "msisdn", "company_name", "industry_name")
+    fields = ("id", "first_name", "last_name", "email", "msisdn", "company_name", "industry_name", "projects")
 
 Client_Schema = ClientSchema()
 Clients_Schema = ClientSchema(many=True)
