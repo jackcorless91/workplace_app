@@ -16,6 +16,7 @@ class Project(db.Model):
   """
 
 class ProjectSchema(ma.Schema):
+  ordered=True
 
   class Meta:
     fields = ("id", "name", "description", "start_date", "due_date")

@@ -16,7 +16,7 @@ class Department(db.Model):
   """
 
 class DepartmentSchema(ma.Schema):
-
+  ordered=True
   class Meta:
     fields = ("id", "name", "speciality", "opening_time", "closing_time")
 

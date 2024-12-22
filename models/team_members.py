@@ -1,5 +1,5 @@
 from init import db, ma
-
+from marshmallow import fields
 from datetime import date
 
 class Team_member(db.Model):
@@ -15,13 +15,14 @@ class Team_member(db.Model):
   tenure = db.Column(db.Integer, nullable=False)
   salary = db.Column(db.Integer, nullable=False)
 
-  """
-  no foreign keys to add
-  """
+  performance_reviews = db.relationship("Performance_review", back_populates="team_member")
+
 
 class Team_memberSchema(ma.Schema):
+  ordered=True
+  performance_reviews = fields.List(fields.Nested("Performance_reviewSchema", exclude=["team_member"]))
   class Meta:
-    fields = ("id", "first_name", "last_name", "email", "msisdn", 'tenure', "salary")
+    fields = ("id", "first_name", "last_name", "email", "msisdn", 'tenure', "salary", "performance_reviews")
 
 Team_member_Schema = Team_memberSchema()
 Team_members_Schema = Team_memberSchema(many=True)

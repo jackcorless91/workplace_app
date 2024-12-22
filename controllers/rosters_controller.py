@@ -7,6 +7,7 @@ from models.rosters import Roster, Rosters_Schema, Roster_Schema
 
 rosters_bp = Blueprint("rosters", __name__, url_prefix="/rosters")
 
+# read all
 @rosters_bp.route("/")
 def get_rosters():
   stmt = db.select(Roster)
@@ -27,7 +28,7 @@ def get_roster(roster_id):
     return {"message": f"Team member with id {roster_id} does not exist"}, 404
   
 
-# POST (create new team member) /team_member
+# POST (create new roster) /roster
 @rosters_bp.route("/", methods=["POST"])
 def create_roster():
   try:
@@ -77,11 +78,5 @@ def update_roster(roster_id):
     return Roster_Schema.dump(roster)
   else:
     return {"message": f"Roster with id {roster_id} does not exist"}, 404
-# except IntegrityError:
-#   return {"message": f"Email address already in use"}, 409
-"""
-update integreity error to check to multiple instead of just email
-"""
-
 
     

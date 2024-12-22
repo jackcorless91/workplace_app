@@ -42,6 +42,9 @@ def seed_tables():
       )  
     ]
 
+    db.session.add_all(team_members)
+    db.session.commit()
+
     rosters = [
       Roster(
         start_time=time(9, 0),  
@@ -49,6 +52,9 @@ def seed_tables():
         shift_date=date(2024, 12, 21)  
       )
     ]
+
+    db.session.add_all(rosters)
+    db.session.commit()
 
     projects = [
       Project(
@@ -58,14 +64,21 @@ def seed_tables():
         due_date=date(2024, 3, 30)
       )
     ]
+    
+    db.session.add_all(projects)
+    db.session.commit()
 
     performance_reviews = [
       Performance_review(
         date=date(2024, 1, 10),
         review_score=85,
-        comments="Consistently meets expectations with exceptional performance in teamwork."
+        comments="Consistently meets expectations with exceptional performance in teamwork.",
+        team_member_id=team_members[0].id
       )
     ]
+
+    db.session.add_all(performance_reviews)
+    db.session.commit()
 
     departments = [
       Department(
@@ -75,6 +88,9 @@ def seed_tables():
         closing_time=time(17, 0)
       )
     ]
+
+    db.session.add_all(departments)
+    db.session.commit()
 
     clients = [
       Client(
@@ -87,6 +103,9 @@ def seed_tables():
       )
     ]
 
+    db.session.add_all(clients)
+    db.session.commit()
+
     client_feedbacks = [
         Client_feedback(
           comments="team member was good",
@@ -95,13 +114,9 @@ def seed_tables():
         )
 
     ]
-
-    db.session.add_all(team_members)
-    db.session.add_all(rosters)
-    db.session.add_all(projects)
-    db.session.add_all(performance_reviews)
-    db.session.add_all(departments)
-    db.session.add_all(clients)
+    
     db.session.add_all(client_feedbacks)
     db.session.commit()
+
     print("Tables seeded")
+

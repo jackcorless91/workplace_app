@@ -16,7 +16,8 @@ class Roster(db.Model):
   """
 
 class RosterSchema(ma.Schema):
-  
+  ordered=True
+
   class Meta:
     fields = ("id", "start_time", "end_time", "shift_date")
 

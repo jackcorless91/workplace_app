@@ -15,7 +15,7 @@ project and client foreign keys to be added
 """
 
 class Client_feedbackSchema(ma.Schema):
-
+  ordered=True
   class Meta:
     fields = ("id", "comments", "rating", "date_submitted")
 

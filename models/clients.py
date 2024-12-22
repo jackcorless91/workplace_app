@@ -18,7 +18,7 @@ class Client(db.Model):
   """
 
 class ClientSchema(ma.Schema):
-
+  ordered=True
   class Meta:
     fields = ("id", "first_name", "last_name", "email", "msisdn", "company_name", "industry_name")
 
