@@ -14,7 +14,7 @@ class Client_feedback(db.Model):
   comments = db.Column(db.String(100), nullable=False)
   rating = db.Column(db.Integer, nullable=False)
   date_submitted = db.Column(db.Date, nullable=False)
-  client_id = db.Column(db.Integer, db.ForeignKey("clients.id"))
+  client_id = db.Column(db.Integer, db.ForeignKey("clients.id", ondelete="CASCADE"))
 
   client = db.relationship("Client", back_populates="client_feedbacks")
 

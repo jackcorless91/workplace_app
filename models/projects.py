@@ -16,8 +16,8 @@ class Project(db.Model):
   description = db.Column(db.String(500), nullable=False)
   start_date = db.Column(db.Date, nullable=False)
   due_date = db.Column(db.Date)
-  team_member_id = db.Column(db.Integer, db.ForeignKey("team_members.id"))
-  client_id = db.Column(db.Integer, db.ForeignKey("clients.id"))
+  team_member_id = db.Column(db.Integer, db.ForeignKey("team_members.id", ondelete="CASCADE"))
+  client_id = db.Column(db.Integer, db.ForeignKey("clients.id", ondelete="CASCADE"))
 
   team_member = db.relationship("Team_member", back_populates="projects")
   client = db.relationship("Client", back_populates="projects")

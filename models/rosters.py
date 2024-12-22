@@ -13,8 +13,8 @@ class Roster(db.Model):
   start_time = db.Column(db.Time, nullable=False)
   end_time = db.Column(db.Time, nullable=False)
   shift_date = db.Column(db.Date, nullable=False)
-  team_member_id = db.Column(db.Integer, db.ForeignKey("team_members.id"))
-  department_id = db.Column(db.Integer, db.ForeignKey("departments.id"))
+  team_member_id = db.Column(db.Integer, db.ForeignKey("team_members.id", ondelete="CASCADE"))
+  department_id = db.Column(db.Integer, db.ForeignKey("departments.id", ondelete="CASCADE"))
 
   team_member = db.relationship("Team_member", back_populates="rosters")
   department = db.relationship("Department", back_populates="rosters")

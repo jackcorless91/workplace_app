@@ -12,7 +12,7 @@ class Performance_review(db.Model):
   date = db.Column(db.Date, nullable=False)
   review_score = db.Column(db.Integer, nullable=False)
   comments = db.Column(db.String(500), nullable=True)
-  team_member_id = db.Column(db.Integer, db.ForeignKey("team_members.id"))
+  team_member_id = db.Column(db.Integer, db.ForeignKey("team_members.id", ondelete="CASCADE"))
 
   team_member = db.relationship("Team_member", back_populates="performance_reviews")
 
