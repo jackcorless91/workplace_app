@@ -28,4 +28,6 @@ I then changed to the following:
 This is now more accurate and the correct way of formatting a date in my models files.
 
 
-### Feedback from a
+# Containerisation 
+This app has been revised and reworked for containerisation.
+It includes automated container builds using GitHub Actions, with secure secret injection and environment specific configuration.
