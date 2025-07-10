@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 env:
-  SERVICE: workplace-db
+  SERVICE: workplace-db-ci-cd
   REGION: ${{ secrets.GCP_REGION }}
   PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
   REPO_NAME: docker-repo
