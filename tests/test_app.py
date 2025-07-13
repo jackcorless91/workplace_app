@@ -5,3 +5,40 @@ def test_home_route(client):
 def test_team_members_get(client):
     response = client.get("/team_members/")
     assert response.status_code == 200
+
+
+def test_projects_get(client):
+    response = client.get("/projects/")
+    assert response.status_code == 200
+    assert isinstance(response.json, list)
+
+
+def test_departments_get(client):
+    response = client.get("/departments/")
+    assert response.status_code == 200
+    assert isinstance(response.json, list)
+
+
+def test_clients_get(client):
+    response = client.get("/clients/")
+    assert response.status_code == 200
+    assert isinstance(response.json, list)
+
+
+def test_performance_reviews_get(client):
+    response = client.get("/performance_reviews/")
+    assert response.status_code == 200
+    assert isinstance(response.json, list)
+
+def test_create_team_member(client):
+    response = client.post("/team_members/", json={
+        "first_name": "Test",
+        "last_name": "User",
+        "email": "test@example.com",
+        "msisdn": "0400000000",
+        "start_date": "2023-01-01",
+        "tenure": 1,
+        "salary": 50000
+    })
+    assert response.status_code == 201
+    assert response.json["first_name"] == "Test"
