@@ -1,3 +1,5 @@
+from datetime import date
+
 def test_home_route(client):
     response = client.get("/")
     assert response.status_code == 404
@@ -36,7 +38,7 @@ def test_create_team_member(client):
         "last_name": "User",
         "email": "test@example.com",
         "msisdn": "0400000000",
-        "start_date": "2023-01-01",
+        "start_date": date(2023, 1, 1).isoformat(),
         "tenure": 1,
         "salary": 50000
     })
