@@ -9,6 +9,11 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    env:
+      FLASK_APP: app.py
+      FLASK_ENV: testing
+      DATABASE_URI: sqlite:///test.db
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
@@ -18,14 +23,21 @@ jobs:
       with:
         python-version: 3.9
 
+    - name: Cache pip
+      uses: actions/cache@v4
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+
     - name: Install dependencies
       run: |
         pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Set up the database
+    - name: Set up the test database
       run: |
-        export DATABASE_URI="sqlite:///test.db"
         flask db create
         flask db seed
 
