@@ -7,7 +7,7 @@ from models.team_members import Team_member, Team_members_Schema, Team_member_Sc
 
 team_members_bp = Blueprint("team_members", __name__, url_prefix="/team_members")
 
-# GET (all team_memebers)
+# GET (all team_members)
 @team_members_bp.route("/")
 def get_team_members():
   stmt = db.select(Team_member)
