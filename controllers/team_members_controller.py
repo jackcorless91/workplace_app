@@ -32,18 +32,11 @@ def create_team_member():
     try:
         body_data = request.get_json()
 
-        start_date_str = body_data.get("start_date")
-        if start_date_str:
-            start_date = datetime.strptime(start_date_str, '%Y-%m-%d').date()  # Convert string to date object
-        else:
-            return {"message": "start_date is required"}, 400
-
         new_team_member = Team_member(
             first_name=body_data.get("first_name"),
             last_name=body_data.get("last_name"),
             email=body_data.get("email"),
             msisdn=body_data.get("msisdn"),
-            start_date=start_date,
             tenure=body_data.get("tenure"),
             salary=body_data.get("salary"),
         )
@@ -85,7 +78,6 @@ def update_team_member(team_member_id):
             team_member.last_name = body_data.get("last_name") or team_member.last_name
             team_member.email = body_data.get("email") or team_member.email
             team_member.msisdn = body_data.get("msisdn") or team_member.msisdn
-            team_member.start_date = body_data.get("start_date") or team_member.start_date
             team_member.tenure = body_data.get("tenure") or team_member.tenure
             team_member.salary = body_data.get("salary") or team_member.salary
             db.session.commit()

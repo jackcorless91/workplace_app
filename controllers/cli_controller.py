@@ -36,7 +36,6 @@ def seed_tables():
         last_name="Doe",
         email="john.doe@example.com",
         msisdn=1234567890,
-        start_date=date(2020, 1, 15),
         tenure=4,
         salary=55000
       )  
