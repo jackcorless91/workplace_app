@@ -43,4 +43,7 @@ def test_create_team_member(client):
         "salary": 50000
     })
     assert response.status_code == 201
-    assert response.json["first_name"] == "Test"
+    data = response.get_json()
+    assert data['first_name'] == "Test"
+    assert data['last_name'] == "User"
+    assert data['start_date'] == "2023-01-01"
