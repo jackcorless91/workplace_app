@@ -1,4 +1,6 @@
 # Continuous Integration and Continuous Deployment (CI/CD) for Workplace App
+### Link to Project on GitHub
+https://github.com/jackcorless91/workplace_app.git
 ## Project overview
 This workplace_app is a RESTful backend built using Flask. It serves as a business management system to look after: employees, departments, client feedback, rosters, performance reviews and projects. The application connects to a PostgreSQL database using SQLAlchemy ORM and containerised using Docker. These updates to the original project introduces automated testing, containerisation, and deployment to Google Cloud Platform (GCP) using GitHub Actions.
 
