@@ -23,6 +23,13 @@ jobs:
         pip install --upgrade pip
         pip install -r requirements.txt
 
+    - name: Set up the database
+      run: |
+        export DATABASE_URI="sqlite:///test.db"
+        flask db upgrade
+        flask db create
+        flask db seed
+
     - name: Run tests
       run: |
         PYTHONPATH=. pytest --junitxml=test-results.xml
