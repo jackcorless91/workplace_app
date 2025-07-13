@@ -26,7 +26,6 @@ jobs:
     - name: Set up the database
       run: |
         export DATABASE_URI="sqlite:///test.db"
-        flask db upgrade
         flask db create
         flask db seed
 
