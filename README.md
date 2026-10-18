@@ -4,6 +4,28 @@ https://github.com/jackcorless91/workplace_app.git
 ## Project overview
 This workplace_app is a RESTful backend built using Flask. It serves as a business management system to look after: employees, departments, client feedback, rosters, performance reviews and projects. The application connects to a PostgreSQL database using SQLAlchemy ORM and containerised using Docker. These updates to the original project introduces automated testing, containerisation, and deployment to Google Cloud Platform (GCP) using GitHub Actions.
 
+## Running Locally
+With no `DATABASE_URI` set, the app uses a local SQLite database at `instance/test.db`. To use Postgres instead, set `DATABASE_URI` (e.g. in a `.env` file).
+
+### Option 1: Python virtual environment (macOS)
+Requires Python 3.13 (`brew install python@3.13`).
+```bash
+python3.13 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+flask db create      # create tables
+flask db seed        # optional: sample data
+flask run            # http://127.0.0.1:8080
+```
+Run the tests with `pytest`.
+
+### Option 2: Docker Compose
+```bash
+docker compose up --build             # http://localhost:8080
+docker compose exec app flask db seed # optional: sample data
+```
+Tables are created automatically on startup, and the SQLite database is kept in a Docker volume so data persists between runs. `docker compose down -v` resets it.
+
 ## Purpose of CI/CD Implementation
 The goal of this ci/cd pipeline is to automate the repetitive mundane process tasks like running tests and deploying updates. Automating these ensured faster release cycles, higher code quality, and reduced cause of human error. It allows developers to focus on building and implementing new features instead of wasting time on setup, configuration and manual deployment.
 This setup is well integrated with GitHub and GitHub Actions. It runs a test suite on every push to the main branch and automatically deploys the application to a serverless environment on Google Cloud Run if all tests successfully pass.

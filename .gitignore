@@ -1,3 +1,29 @@
 __pycache__
 .venv
 .env
+instance/
+*.db
+venv/
+*.swp
+
+# macOS metadata files
+.DS_Store
+**/.DS_Store
+
+# Editor directories and files
+.vscode/
+
+# Ignore local configuration overrides (machine-specific credentials)
+.claude/settings.local.json
+settings.local.json
+# Ignore temporary session files, logs, and process caches
+.claude/file-history/
+.claude/debug/
+.claude/todos/
+.claude/tasks/
+.claude/session-env/
+.claude/shell-snapshots/
+.claude/paste-cache/
+.claude/chrome/
+.claude/history.jsonl
+.claude/agent-memory

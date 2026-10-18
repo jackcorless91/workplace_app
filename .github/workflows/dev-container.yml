@@ -24,9 +24,7 @@ jobs:
       - name: Build Docker image with secrets
         run: |
           docker build \
-            --build-arg DATABASE_URI="$DATABASE_URI" \
             --build-arg FLASK_ENV="$FLASK_ENV" \
-            --build-arg SECRET_KEY="$SECRET_KEY" \
             -t workplace_db:ci .
 
       - name: Run container (basic test)

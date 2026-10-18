@@ -1,0 +1,17 @@
+# Local development: docker compose up --build
+# Builds natively for the host (arm64 on Apple Silicon). The sqlite database
+# lives in a named volume so data survives container rebuilds.
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      FLASK_ENV: development
+      DATABASE_URI: ${DATABASE_URI:-}
+      SECRET_KEY: ${SECRET_KEY:-dev-secret}
+    volumes:
+      - app-data:/app/instance
+
+volumes:
+  app-data:
